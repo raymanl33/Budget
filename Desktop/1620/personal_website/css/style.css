@@ -1,0 +1,31 @@
+
+* {
+    background-color: #808080;
+}
+
+h1 {
+    color: rgb(6, 6, 105);
+}
+
+p {
+    margin: 10px;
+    padding: 20px;
+    color: #002642
+}
+
+ul {
+    color: #002642
+}
+
+nav a {
+    border-color: #E5dada;
+    background-color: #e59500;
+    font-family: 'Roboto Slab', serif;
+    border-style: solid;
+    border-width: 02px;
+    padding: 0.2em 
+}
+
+
+
+
