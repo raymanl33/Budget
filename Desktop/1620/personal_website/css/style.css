@@ -8,13 +8,21 @@ h1 {
 }
 
 p {
+    font-size: 150%;
     margin: 10px;
     padding: 20px;
     color: #002642
 }
 
 ul {
+    font-size: 150%;
     color: #002642
+}
+
+body > nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 30px;
 }
 
 nav a {
@@ -26,6 +34,12 @@ nav a {
     padding: 0.2em 
 }
 
+h1 + img{
+    float: left;
+}
 
-
-
+img {
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+}
