@@ -1,6 +1,7 @@
 import csv
 import sys
 import datetime
+import os
 
 
 def commandlines():
@@ -17,23 +18,22 @@ def commandlines():
 def menu():
     """ main menu """
     print("welcome to Big Mondey Saver Budget App")
-    confirmation = input(f'Would you like to edit an existing budget.CSV file or create a new budget.CSV? Existing CSV file [E], New CSV file [N]: ')
+    confirmation = input(f'To create a new CSV file enter "C", to read a CSV \
+file enter "R", to edit an existing CSV file enter "E", to delete a CSV \
+file enter "D": ')
     confirm = False 
     while confirm == False:
-        if confirmation.upper() == 'E':
+        if confirmation.upper() == 'C' or confirmation.upper() == 'R' or confirmation.upper() == 'E' or confirmation.upper() == 'D':
             confirm = True
 
-            return confirmation 
-        
-        elif confirmation.upper() == 'N':
-            confirm = True
-
-            return confirmation 
+            return confirmation
         else:
             print()
-            print(f'"{confirmation}" is not a correct input. Please [E] to open an existing file or [N] to open a new file')
+            print(f'"{confirmation}" is not a correct input. Please re-enter the command')
             print()
-            confirmation = input(f'Would you like to edit an existing budget.CSV file or create a new budget.CSV? Existing CSV file [E], New CSV file [N]: ')
+            confirmation = input(f'To create a new CSV file enter "C", to read a CSV \
+file enter "R", to edit an existing CSV file enter "E", to delete a CSV \
+file enter "D": ')
             print()
 
 
@@ -44,14 +44,15 @@ def currenttime():
     
     return now
 
-def existingfile(time):
+def existingCSVfile(time):
     """ find the existing CSV file and edit it """
     try:
         CSVfile = input(f'Please enter an existing CSV file name: ')
         with open(CSVfile, 'a') as results:
             csv_writer = csv.writer(results)
             data = []
-            item = input(f'Please enter the name of the item you would like to add to {CSVfile}.CSV: ')
+            item = input(f'Please enter the name of the item you would like to \
+add to {CSVfile}.CSV: ')
             cost = f'$' + input(f'Please enter the cost of the item: ')
             data.append(item)
             data.append(cost)
@@ -77,18 +78,50 @@ def createCSVfile():
                 csv_writer = csv.writer(results)
                 csv_writer.writerow(data)
                 filename = True
-   
 
+def readCSVfile():
+    """ read existing CSV file and output the result on the command screen """
+    read_file = input(f'To read a CSV file, please enter an existing CSV filename: ')
+    with open(read_file) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            print(*row, sep=", ")
+
+
+def deleteCSVfile():
+    """ delete a specific CSV file """
+    filename = input(f'Please enter an existing CSV file you would like to delete: ')
+    if(os.path.exists(filename) and os.path.isfile(filename)):
+        confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
+        confirm = False
+        while confirm == False:
+            if confirmation.upper() == 'Y':
+                os.remove(filename)
+                print("file deleted")
+                confirm = True
+            elif confirmation.upper() == 'N':
+                print(f'{filename} not deleted')
+                confirm = True
+            else:
+                print(f'{confirmation} is not a valid input. Please enter again.')
+                confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
+                confirm = False
+    else:
+        print("file not found")
 
 def main():
-    argv = commandlines()
+    commandlines()
     confirm = menu()
     current_time = currenttime()
     if confirm.upper() == 'E':
-        existingfile(current_time)
-    elif confirm.upper() == 'N':
+        existingCSVfile(current_time)
+    elif confirm.upper() == 'C':
         createCSVfile()
-    print (argv, csv)
+    elif confirm.upper() == 'R':
+        readCSVfile()
+    elif confirm.upper() == 'D':
+        deleteCSVfile()
+  
 
 main()
 
