@@ -74,8 +74,7 @@ def createCSVfile():
             print (f'CSV file name needs to have at least one character or number')
             newfile = input(f'Please enter a new CSV name: ')
         elif len(newfile) > 0:
-                
-            data = ['Item', 'Cost', 'Date']
+            data = ['Item','Cost', 'Date']
             with open(f'{newfile}.csv', 'w', newline='') as results:
                 csv_writer = csv.writer(results)
                 csv_writer.writerow(data)
