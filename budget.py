@@ -17,10 +17,10 @@ def commandlines():
 
 def menu():
     """ main menu """
-    print("welcome to Big Mondey Saver Budget App")
-    confirmation = input(f'To create a new CSV file enter "C", to read a CSV \
-file enter "R", to edit an existing CSV file enter "E", to delete a CSV \
-file enter "D": ')
+    print("\nwelcome to Big Mondey Saver Budget App\n")
+    confirmation = input(f'To create a new CSV file enter "C"\nTo read a CSV \
+file enter "R"\nTo edit an existing CSV file enter "E"\nTo delete a CSV \
+file enter "D": \n')
     confirm = False 
     while confirm == False:
         if confirmation.upper() == 'C' or confirmation.upper() == 'R' or confirmation.upper() == 'E' or confirmation.upper() == 'D':
@@ -31,9 +31,9 @@ file enter "D": ')
             print()
             print(f'"{confirmation}" is not a correct input. Please re-enter the command')
             print()
-            confirmation = input(f'To create a new CSV file enter "C", to read a CSV \
-file enter "R", to edit an existing CSV file enter "E", to delete a CSV \
-file enter "D": ')
+            confirmation = input(f'To create a new CSV file enter "C"\nTo read a CSV \
+file enter "R"\nTo edit an existing CSV file enter "E"\nTo delete a CSV \
+file enter "D": \n')
             print()
 
 
@@ -65,7 +65,7 @@ add to {CSVfile}.CSV: ')
 
 def createCSVfile():
     """ take user input to create a new csv file """
-    newfile = input(f'Please enter a new CSV name')
+    newfile = input(f'Please enter a new CSV name: ')
     filename = False
     while filename == False:
         if len(newfile) <= 0:
@@ -81,12 +81,19 @@ def createCSVfile():
 
 def readCSVfile():
     """ read existing CSV file and output the result on the command screen """
+    fileExist = False
     read_file = input(f'To read a CSV file, please enter an existing CSV filename: ')
-    with open(read_file) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
-            print(*row, sep=", ")
+    while fileExist == False:
+        try:
+            with open(read_file) as csv_file:
+                csv_reader = csv.reader(csv_file, delimiter=',')
+                for row in csv_reader:
+                    print(*row, sep=", ")
+                fileExist = True
 
+        except FileNotFoundError:
+            print(f'{read_file} not found. Please try again!')
+            read_file = input(f'To read a CSV file, please enter an existing CSV filename: ')
 
 def deleteCSVfile():
     """ delete a specific CSV file """
@@ -97,7 +104,7 @@ def deleteCSVfile():
         while confirm == False:
             if confirmation.upper() == 'Y':
                 os.remove(filename)
-                print("file deleted")
+                print(f"{filename} deleted")
                 confirm = True
             elif confirmation.upper() == 'N':
                 print(f'{filename} not deleted')
@@ -107,7 +114,7 @@ def deleteCSVfile():
                 confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
                 confirm = False
     else:
-        print("file not found")
+        print(f"{filename} file not found")
 
 def main():
     commandlines()
@@ -122,7 +129,6 @@ def main():
     elif confirm.upper() == 'D':
         deleteCSVfile()
   
-
 main()
 
 
