@@ -98,23 +98,27 @@ def readCSVfile():
 def deleteCSVfile():
     """ delete a specific CSV file """
     filename = input(f'Please enter an existing CSV file you would like to delete: ')
-    if(os.path.exists(filename) and os.path.isfile(filename)):
-        confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
-        confirm = False
-        while confirm == False:
-            if confirmation.upper() == 'Y':
-                os.remove(filename)
-                print(f"{filename} deleted")
-                confirm = True
-            elif confirmation.upper() == 'N':
-                print(f'{filename} not deleted')
-                confirm = True
-            else:
-                print(f'{confirmation} is not a valid input. Please enter again.')
-                confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
-                confirm = False
-    else:
-        print(f"{filename} file not found")
+    fileExist = False
+    while fileExist == False:
+        if(os.path.exists(filename) and os.path.isfile(filename)):
+            confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
+            confirm = False
+            fileExist = True
+            while confirm == False:
+                if confirmation.upper() == 'Y':
+                    os.remove(filename)
+                    print(f"{filename} deleted")
+                    confirm = True
+                elif confirmation.upper() == 'N':
+                    print(f'{filename} not deleted')
+                    confirm = True
+                else:
+                    print(f'{confirmation} is not a valid input. Please enter again.')
+                    confirmation = input(f'Are you sure you would like to delete {filename}? Yes[Y]/ No[N]: ')
+                    confirm = False
+        else:
+            print(f"{filename} file not found")
+            filename = input(f'Please enter an existing CSV file you would like to delete: ')
 
 def main():
     commandlines()
