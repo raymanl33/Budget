@@ -52,7 +52,7 @@ def existingCSVfile(time):
             csv_writer = csv.writer(results)
             data = []
             item = input(f'Please enter the name of the item you would like to \
-add to {CSVfile}.CSV: ')
+add to {CSVfile}: ')
             cost = f'$' + input(f'Please enter the cost of the item: ')
             data.append(item)
             data.append(cost)
@@ -74,7 +74,7 @@ def createCSVfile():
         elif len(newfile) > 0:
                 
             data = ['Item', 'Cost', 'Date']
-            with open(newfile, 'w', newline='') as results:
+            with open(f'{newfile}.csv', 'w', newline='') as results:
                 csv_writer = csv.writer(results)
                 csv_writer.writerow(data)
                 filename = True
