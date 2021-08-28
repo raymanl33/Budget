@@ -20,20 +20,22 @@ def menu():
     print("\nwelcome to Big Mondey Saver Budget App\n")
     confirmation = input(f'To create a new CSV file enter "C"\nTo read a CSV \
 file enter "R"\nTo edit an existing CSV file enter "E"\nTo delete a CSV \
-file enter "D": \n')
+file enter "D" \nTo quit enter "Q" \n:')
     confirm = False 
     while confirm == False:
         if confirmation.upper() == 'C' or confirmation.upper() == 'R' or confirmation.upper() == 'E' or confirmation.upper() == 'D':
             confirm = True
 
             return confirmation
+        elif confirmation.upper() == 'Q':
+            sys.exit(f'Quiting Big Money Saver Budget App ...')
         else:
             print()
             print(f'"{confirmation}" is not a correct input. Please re-enter the command')
             print()
             confirmation = input(f'To create a new CSV file enter "C"\nTo read a CSV \
 file enter "R"\nTo edit an existing CSV file enter "E"\nTo delete a CSV \
-file enter "D": \n')
+file enter "D" \nTo quit enter "Q" \n:')
             print()
 
 
