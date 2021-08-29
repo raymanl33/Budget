@@ -10,7 +10,7 @@ def commandlines():
         filename = sys.argv[0]
         
         return filename
-
+        
     except IndexError:
         sys.exit(f'Incorect filename please try python3 budget.py')
 
